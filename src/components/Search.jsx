@@ -3,8 +3,10 @@ import { InputText } from 'primereact/inputtext';
 import PropTypes from 'prop-types';
 
 const Search = (props) => {
-  const [value, setValue] = useState();
-  props.searchText(value);
+  const [value, setValue] = useState('');
+  const onEnterInSearch = (e) => {
+    if (e.charCode === 13) props.searchText(e.target.value);
+  };
   return (
     <div>
       <span className="p-input-icon-left">
@@ -14,12 +16,13 @@ const Search = (props) => {
           placeholder="Search"
           value={value}
           onChange={(e) => setValue(e.target.value)}
+          onKeyPress={(e) => onEnterInSearch(e)}
         />
       </span>
     </div>
   );
 };
 Search.propTypes = {
-  searchText: PropTypes.string.isRequired
+  searchText: PropTypes.func.isRequired
 };
 export default Search;
