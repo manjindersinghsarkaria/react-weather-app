@@ -1,16 +1,18 @@
-import React from 'react';
-import { ReactComponent as Weather } from '../../images/02d.svg';
+import React, { useState } from 'react';
+import WeatherIcon from '../WeatherIcon';
 import ForeCastCard from './ForeCastCard';
 import PropTypes from 'prop-types';
 const InitialSearchCard = (props) => {
+  const [iconNameText, setIconNameText] = useState('img02d');
   const onUserSearch = (searchData) => {
-    console.log(searchData);
     props.searchData(searchData);
+    setIconNameText(`img${searchData.list[0].weather[0].icon}`);
   };
+
   return (
     <>
       <div className="flex flex-row items-center justify-center">
-        <Weather width="300px" height="300px" />
+        <WeatherIcon iconName={iconNameText} />
         <span>
           <h1 className="font-medium text-6xl text-sky-800">
             Weather Forecast

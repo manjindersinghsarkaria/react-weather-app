@@ -1,18 +1,25 @@
-import React from 'react';
-import { ReactComponent as Weather } from './../images/02d.svg';
-
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import WeatherIcon from './WeatherIcon';
 const CityWithForecast = (props) => {
-  console.log(props.searchData);
+  const [iconNameText, setIconNameText] = useState('');
+  const [descriptionText, setDescriptionText] = useState('');
+  useEffect(() => {
+    setIconNameText(`img${props.searchData.list[0].weather[0].icon}`);
+    setDescriptionText(props.searchData.list[0].weather[0].description);
+  }, [props.searchData]);
+
   return (
     <>
       <div className="flex flex-row items-center justify-center">
-        <Weather width="300px" height="300px" />
-        <span>
+        <WeatherIcon iconName={iconNameText} />
+        <div>
+          <span className="font-normal text-xl">Today</span>
           <h1 className="font-medium text-6xl text-sky-800">
-            Weather Forecast
+            {props.searchData.city.name}
           </h1>
-        </span>
+          <p>{descriptionText}</p>
+        </div>
       </div>
     </>
   );
