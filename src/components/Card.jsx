@@ -8,6 +8,9 @@ const Card = (props) => {
   );
 };
 Card.propTypes = {
-  children: PropTypes.object.isRequired
+  children: PropTypes.oneOfType([
+    PropTypes.func, // Function returning a component or HTML
+    PropTypes.object // Component or HTML
+  ])
 };
 export default Card;

@@ -1,28 +1,28 @@
-import React, { useState } from 'react';
-
+import React from 'react';
+import PropTypes from 'prop-types';
 import api from '../../services';
 import Search from '../Search';
-import isEmpty from 'lodash/isEmpty';
-const ForeCastCard = () => {
-  const [foreCastData, setForeCastData] = useState({});
-  const getCityNameText = (value) => {
+const ForeCastCard = (props) => {
+  const getCityNameData = (value) => {
     api.data
       .getForecastByCity(value)
       .then(({ data }) => {
-        console.log(data);
-        setForeCastData(data);
+        props.checkSearchTriggered(data);
       })
       .catch(() => {
         console.log('Error');
       });
   };
-  console.log(foreCastData);
-  console.log(isEmpty(foreCastData));
+
   return (
     <div className="grid justify-center p-6">
-      <Search searchText={getCityNameText}></Search>
+      <Search searchText={getCityNameData}></Search>
     </div>
   );
+};
+
+ForeCastCard.propTypes = {
+  checkSearchTriggered: PropTypes.func.isRequired
 };
 
 export default ForeCastCard;

@@ -1,8 +1,12 @@
 import React from 'react';
 import { ReactComponent as Weather } from '../../images/02d.svg';
 import ForeCastCard from './ForeCastCard';
-
-const InitialSearchCard = () => {
+import PropTypes from 'prop-types';
+const InitialSearchCard = (props) => {
+  const onUserSearch = (searchData) => {
+    console.log(searchData);
+    props.searchData(searchData);
+  };
   return (
     <>
       <div className="flex flex-row items-center justify-center">
@@ -13,9 +17,12 @@ const InitialSearchCard = () => {
           </h1>
         </span>
       </div>
-      <ForeCastCard></ForeCastCard>
+      <ForeCastCard checkSearchTriggered={onUserSearch}></ForeCastCard>
     </>
   );
+};
+InitialSearchCard.propTypes = {
+  searchData: PropTypes.func.isRequired
 };
 
 export default InitialSearchCard;
