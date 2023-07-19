@@ -8,7 +8,7 @@ const Search = (props) => {
     if (e.charCode === 13) props.searchText(e.target.value);
   };
   return (
-    <div className="pb-16 w-[500px]">
+    <div className="ml-auto mr-auto w-[500px]">
       <span className="p-input-icon-left w-full">
         <i className="pi pi-search !text-neutral-500" />
         <InputText

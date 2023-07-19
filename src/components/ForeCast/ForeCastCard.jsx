@@ -15,7 +15,7 @@ const ForeCastCard = (props) => {
   };
 
   return (
-    <div className="grid justify-center p-6">
+    <div className="flex items-center my-6">
       <Search searchText={getCityNameData}></Search>
     </div>
   );

@@ -34,22 +34,27 @@ function App() {
   const searchOutside = () => {
     if (!isEmpty(forecastData)) {
       return (
-        <div className="grid justify-center p-6">
+        <div className="grid justify-center p-6 mt-24 mb-8">
           <Search searchText={getCityNameData}></Search>
         </div>
       );
     }
   };
   return (
-    <div style={backgroundStyle} className="h-screen w-full bg-bottom grid">
+    <div
+      style={backgroundStyle}
+      className="h-screen w-full bg-bottom flex flex-col"
+    >
       {searchOutside()}
-      <Card>
-        {initialSearch ? (
-          <InitialSearchCard searchData={userSearchData} />
-        ) : (
-          <CityWithForecast searchData={forecastData} />
-        )}
-      </Card>
+      <div className={initialSearch ? 'm-auto' : 'ml-auto mr-auto'}>
+        <Card>
+          {initialSearch ? (
+            <InitialSearchCard searchData={userSearchData} />
+          ) : (
+            <CityWithForecast searchData={forecastData} />
+          )}
+        </Card>
+      </div>
     </div>
   );
 }
