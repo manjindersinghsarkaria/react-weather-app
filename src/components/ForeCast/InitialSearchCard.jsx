@@ -1,12 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import WeatherIcon from '../WeatherIcon';
 import ForeCastCard from './ForeCastCard';
 import PropTypes from 'prop-types';
+import isEmpty from 'lodash/isEmpty';
 const InitialSearchCard = (props) => {
   const [iconNameText, setIconNameText] = useState('img02d');
-  const onUserSearch = (searchData) => {
-    props.searchData(searchData);
-    setIconNameText(`img${searchData.list[0].weather[0].icon}`);
+  useEffect(() => {
+    const iconText = !isEmpty(props.searchData)
+      ? `img${props.searchData?.list[0]?.weather[0].icon}`
+      : 'img02d';
+    setIconNameText(iconText);
+  }, [props.searchData]);
+
+  const searchTextFromChild = (value) => {
+    props.searchText(value);
   };
 
   return (
@@ -19,12 +26,13 @@ const InitialSearchCard = (props) => {
           </h1>
         </span>
       </div>
-      <ForeCastCard checkSearchTriggered={onUserSearch}></ForeCastCard>
+      <ForeCastCard searchText={searchTextFromChild}></ForeCastCard>
     </>
   );
 };
 InitialSearchCard.propTypes = {
-  searchData: PropTypes.func.isRequired
+  searchData: PropTypes.object.isRequired,
+  searchText: PropTypes.func.isRequired
 };
 
 export default InitialSearchCard;

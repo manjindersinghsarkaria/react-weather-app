@@ -44,11 +44,14 @@ const WeatherIcon = (props) => {
     img50n: img50n,
     imgCloudy: imgCloudy
   };
-
-  return <img src={iconMap[props.iconName]} width="300px" height="300px" />;
+  const width = props.width ? props.width : '300px';
+  const height = props.width ? props.height : '300px';
+  return <img src={iconMap[props.iconName]} width={width} height={height} />;
 };
 WeatherIcon.propTypes = {
-  iconName: PropTypes.string.isRequired
+  iconName: PropTypes.string.isRequired,
+  width: PropTypes.string,
+  height: PropTypes.string
 };
 
 export default WeatherIcon;

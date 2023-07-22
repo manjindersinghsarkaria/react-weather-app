@@ -17,14 +17,14 @@ const CityWithForecast = (props) => {
     <>
       <div className="flex flex-row items-center justify-center">
         <WeatherIcon iconName={iconNameText} />
-        <div>
-          <span className="font-normal text-xl mb-3">Today</span>
+        <div className="text-xl">
+          <span className="font-normal  mb-3">Today</span>
           <h1 className="font-medium mb-3 text-6xl text-sky-800">
             {city.name}
           </h1>
 
           <p className="mb-3">
-            Temperature: {main.temp}
+            Temperature: {Math.ceil(main.temp)}
             °C
           </p>
           <p className="mb-3">{descriptionText}</p>

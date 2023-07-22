@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Background from './images/background.jpg';
 import InitialSearchCard from './components/ForeCast/InitialSearchCard';
 import CityWithForecast from './components/CityWithForecast';
+import WeatherBoxList from './components/ForeCast/WeatherBoxList';
 import Search from './components/Search';
 import 'primereact/resources/themes/vela-blue/theme.css';
 import 'primereact/resources/primereact.min.css';
@@ -16,16 +17,13 @@ function App() {
   };
   const [initialSearch, setInitialSearch] = useState(true);
   const [forecastData, setForecastData] = useState({});
-  const userSearchData = (data) => {
-    console.log(data);
-    setInitialSearch(isEmpty(data));
-    setForecastData(data);
-  };
+
   const getCityNameData = (value) => {
     api.data
       .getForecastByCity(value)
       .then(({ data }) => {
         setForecastData(data);
+        setInitialSearch(isEmpty(data));
       })
       .catch(() => {
         console.log('Error');
@@ -49,9 +47,15 @@ function App() {
       <div className={initialSearch ? 'm-auto' : 'ml-auto mr-auto'}>
         <Card>
           {initialSearch ? (
-            <InitialSearchCard searchData={userSearchData} />
+            <InitialSearchCard
+              searchData={forecastData}
+              searchText={getCityNameData}
+            />
           ) : (
-            <CityWithForecast searchData={forecastData} />
+            <div>
+              <CityWithForecast searchData={forecastData} />
+              <WeatherBoxList searchData={forecastData} />
+            </div>
           )}
         </Card>
       </div>

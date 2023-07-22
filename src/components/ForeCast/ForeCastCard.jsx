@@ -1,17 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import api from '../../services';
+// import api from '../../services';
 import Search from '../Search';
 const ForeCastCard = (props) => {
   const getCityNameData = (value) => {
-    api.data
-      .getForecastByCity(value)
-      .then(({ data }) => {
-        props.checkSearchTriggered(data);
-      })
-      .catch(() => {
-        console.log('Error');
-      });
+    props.searchText(value);
   };
 
   return (
@@ -22,7 +15,7 @@ const ForeCastCard = (props) => {
 };
 
 ForeCastCard.propTypes = {
-  checkSearchTriggered: PropTypes.func.isRequired
+  searchText: PropTypes.func.isRequired
 };
 
 export default ForeCastCard;
